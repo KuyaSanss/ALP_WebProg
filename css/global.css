@@ -1,4 +1,20 @@
+.logoDiv {
+    display: flex;
+    align-items: center;
+}
+
 .logo {
     border-radius: 50%;
     width: 50px;
+}
+
+.navLink {
+    color: #4b5666;
+    padding: 7px;
+    border-radius: 10px;
+}
+
+.navLink:hover {
+    transition: background-color 0.3s ease;
+    background-color: #E7F5D9;
 }

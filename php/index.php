@@ -1,3 +1,14 @@
+<?php
+    session_start();
+
+    $host = "localhost";
+    $user = "root";
+    $password = "";
+    $database = "perpustakaandb";
+
+    $conn = mysqli_connect($host, $user, $password, $database);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,17 +24,6 @@
     <link rel="stylesheet" href="https://cloudflare.com">
 </head>
 <body>
-    <?php
-        session_start();
-
-        $host = "localhost";
-        $user = "root";
-        $password = "";
-        $database = "perpustakaandb";
-
-        $conn = mysqli_connect($host, $user, $password, $database);
-    ?>
-
     <div class="flex">
         <div class="hidden md:block bg-[radial-gradient(circle_at_50%_50%,#6d9b79_0%,#679573_35%,#578663_100%)] w-[50%] min-h-screen p-20">
             <div class="flex text-white text-[30px] items-center gap-[20px]">
@@ -153,7 +153,7 @@
                         $anggota = mysqli_fetch_assoc($result);
 
                         $_SESSION['AnggotaID'] = $anggota['AnggotaID'];
-                        $_SESSION['nama'] = $anggota['nama'];
+                        $_SESSION['Nama'] = $anggota['Nama'];
 
                         header("Location: userDashboard.php");
                         exit();
