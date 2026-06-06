@@ -8,7 +8,7 @@
     }
 ?>
 
-<nav class="navbar w-screen bg-white sticky top-0 shadow-md p-[15px] pl-[30px] pr-[30px] flex justify-between">
+<nav class="w-screen bg-white fixed top-0 left-0 shadow-md p-[15px] pl-[30px] pr-[30px] flex justify-between">
     <div class="logoDiv gap-[7px] text-[#3e5f44] text-[20px]">
         <img src="https://img.freepik.com/premium-vector/lorem-ipsum-logo-design-colorful-gradient_779267-46.jpg?w=2000" alt="logo" class="logo">
         <b><p>Knowlede Journey</p></b>
