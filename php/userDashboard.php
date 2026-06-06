@@ -37,7 +37,7 @@
     WHERE p.AnggotaID = $idAnggota
     AND dp.StatusPeminjaman = 'Dipinjam'
     AND p.TanggalTenggatPengembalian >= CURDATE()
-    AND p.TanggalTenggatPengembalian <= DATE_ADD(CURDATE(), INTERVAL 7 DAY)
+    AND p.TanggalTenggatPengembalian <= DATE_ADD(CURDATE(), INTERVAL 3 DAY)
     ";
 
     $resultTenggatMingguIni = mysqli_query($conn, $sqlTenggatMingguIni);
@@ -61,8 +61,23 @@
     $jumlahDendaBelumBayar = $dataDendaBelumBayar['total'] ?? 0;
 
     // buku dipinjam
+    $sqlDendaBelumBayar = "
+    SELECT SUM(d.NominalBayar) AS total
+    FROM denda d
+    JOIN peminjaman p
+    ON d.PeminjamanID = p.PeminjamanID
+    WHERE p.AnggotaID = $idAnggota
+    AND d.StatusPembayaran = 'Belum Bayar'
+    ";
+
+    $resultDendaBelumBayar = mysqli_query($conn, $sqlDendaBelumBayar);
+    $dataDendaBelumBayar = mysqli_fetch_assoc($resultDendaBelumBayar);
+
+    $jumlahDendaBelumBayar = $dataDendaBelumBayar['total'] ?: 0;
+
+
     $sqlBukuDipinjam = "
-    SELECT 
+    SELECT
         b.JudulBuku,
         b.NamaPengarang,
         b.CoverBuku,
@@ -75,9 +90,11 @@
     ON dp.BukuID = b.BukuID
     WHERE p.AnggotaID = $idAnggota
     AND dp.StatusPeminjaman = 'Dipinjam'
+    ORDER BY p.TanggalTenggatPengembalian ASC
     ";
 
     $resultBukuDipinjam = mysqli_query($conn, $sqlBukuDipinjam);
+    $jumlahBukuDipinjam = mysqli_num_rows($resultBukuDipinjam);
 ?>
 
 <!DOCTYPE html>
@@ -96,12 +113,12 @@
     <script src="../js/globalJS.js"></script>
     
 </head>
-<body class="bg-[#e8ffd7] p-20 pt-[120px]">
+<body>
     <div id="navBarPosition"></div>
-    <p class="text-[35px]"><b>Welcome back, <?php echo $nama ?>!</b></p>
+    <p class="text-[28px] md:text-[35px]"><b>Welcome back, <?php echo $nama ?>!</b></p>
     <p class="text-[#4f5a65] mb-[50px]">Continue your learning journey today</p>
 
-    <div class="flex w-[100%] justify-between mb-[50px]">
+    <div class="flex flex-col md:flex-row w-full gap-[20px] md:gap-0 md:justify-between mb-[50px]">
         <div class="userInfo">
             <div>
                 <i class="fa-solid fa-book"></i>
@@ -116,74 +133,71 @@
             </div>
             
             <h1><b><?php echo $jumlahTenggatMingguIni; ?></b></h1>
-            <p>Tenggat minggu ini</p>
+            <p>Tenggat kurang dari 3 hari</p>
         </div>
         <div class="userInfo">
             <div>
                 <i class="fa-solid fa-dollar-sign"></i>
             </div>
             
-            <h1 class="text-red-700"><b>Rp.<?php echo $jumlahDendaBelumBayar ?></b></h1>
+            <h1 class="text-red-700 md:!text-[40px] !text-[22px] "><b>Rp.<?php echo $jumlahDendaBelumBayar ?></b></h1>
             <p>Total denda</p>
         </div>
     </div>
 
     <p class="text-[25px]"><b>Buku yang sedang dipinjam</b></p>
     <div class="mt-[50px]">
-        <div class="flex flex-col gap-[20px]">
-            <?php while($buku = mysqli_fetch_assoc($resultBukuDipinjam)) { ?>
-                <div class="bg-white rounded-[20px] shadow-md p-[16px] flex items-center justify-between">
-                    <div class="flex gap-[20px] items-center">
-                        <img 
-                        src="../<?php echo $buku['CoverBuku']; ?>"
-                        alt="Cover Buku"
-                        class="w-[80px] h-[100px] object-cover rounded-[15px]">
-                        <div>
-                            <h3 class="text-[28px] font-bold">
-                                <?php echo $buku['JudulBuku']; ?>
-                            </h3>
-
-                            <p class="text-gray-500 text-[18px]">
-                                <?php echo $buku['NamaPengarang']; ?>
-                            </p>
-
-                            <div class="flex items-center gap-[10px] mt-[10px]">
-                                <i class="fa-regular fa-calendar text-gray-500"></i>
-                                <span class="text-gray-500">
-                                    Due:
-                                    <?php echo $buku['TanggalTenggatPengembalian']; ?>
-                                </span>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div>
-                        <?php
-                            if(strtotime($buku['TanggalTenggatPengembalian']) < strtotime(date('Y-m-d'))){
-                        ?>
-                            <span class="bg-red-100 text-red-700 px-[15px] py-[8px] rounded-full font-semibold">
-                                Due
-                            </span>
-
-                        <?php
-                            } else {
-                        ?>
-
-                            <span class="bg-green-100 text-green-700 px-[15px] py-[8px] rounded-full font-semibold">
-                                Active
-                            </span>
-
-                        <?php
-                            }
-                        ?>
-                    </div>
-
+        <div class="mt-[30px]">
+            <?php if($jumlahBukuDipinjam == 0){ ?>
+                <div class="bg-white rounded-[20px] shadow-md p-[40px] text-center">
+                    <i class="fa-solid fa-book-open text-[50px] text-gray-300 mb-[15px]"></i>
+                    <p class="text-[22px] font-semibold text-gray-500">
+                        Anda sedang tidak meminjam buku apapun!
+                    </p>
                 </div>
+            <?php } else { ?>
+                <div class="flex flex-col gap-[20px]">
+                        <?php while($buku = mysqli_fetch_assoc($resultBukuDipinjam)) { ?>
+                            <div class="bg-white rounded-[20px] shadow-md p-[16px] flex flex-col md:flex-row md:items-center md:justify-between gap-[20px]">
+                                <div class="flex flex-col sm:flex-row gap-[20px] items-center sm:items-start text-center sm:text-left">
+                                    <img 
+                                    src="<?php echo $buku['CoverBuku']; ?>"
+                                    alt="Cover Buku"
+                                    class="w-[100px] h-[125px] md:w-[80px] md:h-[100px] object-cover rounded-[15px]">
+                                    <div>
+                                        <h3 class="text-[22px] md:text-[28px] font-bold">
+                                            <?php echo $buku['JudulBuku']; ?>
+                                        </h3>
+                                        <p class="text-gray-500 text-[18px]">
+                                            <?php echo $buku['NamaPengarang']; ?>
+                                        </p>
+                                        <div class="flex items-center gap-[10px] mt-[10px]">
+                                            <i class="fa-regular fa-calendar text-gray-500"></i>
+                                            <span class="text-gray-500">
+                                                Due:
+                                                <?php echo $buku['TanggalTenggatPengembalian']; ?>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
 
+                                <div>
+                                    <?php if(strtotime($buku['TanggalTenggatPengembalian']) < strtotime(date('Y-m-d'))){ ?>
+                                        <span class="bg-red-100 text-red-700 px-[15px] py-[8px] rounded-full font-semibold">
+                                            Due
+                                        </span>
+
+                                    <?php } else { ?>
+                                        <span class="bg-green-100 text-green-700 px-[15px] py-[8px] rounded-full font-semibold">
+                                            Aktif
+                                        </span>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        <?php } ?>
+                    </div>
+                </div>
             <?php } ?>
-
         </div>
     </div>
 </body>

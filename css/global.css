@@ -1,11 +1,22 @@
-.logoDiv {
-    display: flex;
-    align-items: center;
+body{
+    background-color: #e8ffd7;
+    background-image:
+        linear-gradient(#d3ffb4 1px, transparent 1px),
+        linear-gradient(90deg, #d3ffb4 1px, transparent 1px);
+    padding: 60px;
+    padding-top: 120px;
+    background-size:120px 120px;
+    background-attachment: fixed;
 }
 
 .logo {
     border-radius: 50%;
     width: 50px;
+}
+
+.logoDiv {
+    display: flex;
+    align-items: center;
 }
 
 .navLink {
@@ -18,3 +29,5 @@
     transition: background-color 0.3s ease;
     background-color: #E7F5D9;
 }
+
+

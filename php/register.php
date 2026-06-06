@@ -8,26 +8,35 @@
 
     $conn = mysqli_connect($host, $user, $password, $database);
     if(isset($_POST['submit'])){
-
-        $nama = $_POST['nama'];
-        $alamat = $_POST['alamat'];
-        $nohp = $_POST['noTel'];
-        $nim = $_POST['NIM'];
-
-        mysqli_query($conn,"
-            INSERT INTO anggota
-            (Nama,Alamat,NomerHandphone,NIM)
-            VALUES
-            ('$nama','$alamat','$nohp','$nim')
+                $nama = $_POST['nama'];
+                $alamat = $_POST['alamat'];
+                $nohp = $_POST['noTel'];
+                $nim = $_POST['NIM'];
+                $cekNim = mysqli_query($conn,"
+            SELECT *
+            FROM anggota
+            WHERE NIM = '$nim'
         ");
 
-        header("Location: index.php");
-        echo "
+        if(mysqli_num_rows($cekNim) > 0){
+            echo "
             <script>
-                alert('register berhasil')
+                alert('NIM sudah terdaftar');
             </script>
-        ";
-        exit;
+            ";
+        }
+        else{
+            mysqli_query($conn,"
+                INSERT INTO anggota
+                (Nama,Alamat,NomerHandphone,NIM)
+                VALUES
+                ('$nama','$alamat','$nohp','$nim')
+            ");
+
+            header("Location: index.php");
+            exit;
+    }
+        
     }
     $query = mysqli_query($conn, "SELECT * FROM anggota");
 ?>
@@ -37,12 +46,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
+    <title>Register Page</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://googleapis.com"></script>
 
-    <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="../css/loginRegister.css">
     <link rel="stylesheet" href="https://cloudflare.com">
 </head>
@@ -56,9 +64,7 @@
                 </p>
             </div>
 
-            <br>
-            <br>
-            <br>
+            <div class="h-[60px]"></div>
 
             <div class="text-white">
                 <p class="text-[60px]">
@@ -70,9 +76,7 @@
                 </p>
             </div>
 
-            <br>
-            <br>
-            <br>
+            <div class="h-[60px]"></div>
 
             <div class="flex h-100% justify-between">
                 <?php 
@@ -126,9 +130,15 @@
             </div>
         </div>
             
-        <div class="w-[50%] pt-10 pb-10 pl-20 pr-20 flex flex-col gap-20">
+        <div class="w-full md:w-[50%] pt-10 pb-10 px-6 md:pl-20 md:pr-20 flex flex-col gap-12 md:gap-20 max-w-[700px] mx-auto">
             <div>
-                <p class="text-[40px]">
+                <div class="flex md:hidden items-center gap-[12px] mb-[20px]">
+                    <img src="https://img.freepik.com/premium-vector/lorem-ipsum-logo-design-colorful-gradient_779267-46.jpg?w=2000" alt="logo" class="w-[50px] h-[50px] rounded-full">
+                    <p class="text-[22px] font-bold text-[#3e5f44]">
+                        Knowledge Journey
+                    </p>
+                </div>
+                <p class="text-[32px] md:text-[40px]">
                     <b>Create Account</b>
                 </p>
                 <p>
@@ -139,34 +149,34 @@
             <form action="" method="post">
                 <div>
                     <label for="">Nama</label>
-                    <input type="text" name="nama" placeholder="&#9993; Enter your name" autocomplete="off">
+                    <input type="text" name="nama" placeholder="&#9993; Enter your name" autocomplete="off" class="w-full">
                 </div>
                 
                 <br>
 
                 <div>
                     <label for="">NIM</label>
-                    <input type="text" name="NIM" placeholder="&#128274; Enter your NIM" autocomplete="off">
+                    <input type="text" name="NIM" placeholder="&#128274; Enter your NIM" autocomplete="off" class="w-full">
                 </div>
 
                 <br>
 
                 <div>
                     <label for="">Alamat</label>
-                    <input type="text" name="alamat" placeholder="Enter your address" autocomplete="off">
+                    <input type="text" name="alamat" placeholder="Enter your address" autocomplete="off" class="w-full">
                 </div>
 
                 <br>
 
                 <div>
                     <label for="">NoTelp</label>
-                    <input type="tel" name="noTel" placeholder="Enter your phone number" autocomplete="off">
+                    <input type="tel" name="noTel" placeholder="Enter your phone number" autocomplete="off" class="w-full">
                 </div>
 
                 <br>
 
-                <button type="submit" name="submit" class="w-[100%] p-[5px] bg-[#3e5f44] text-white rounded-[20px]"><b>Create Account</b></button>
-                <p class="text-center text-[#4a556a]">already have an account? <a href="index.php" class="text-[#507156]">Sign In</a></p>
+                <button type="submit" name="submit" class="w-full py-[12px] bg-[#3e5f44] text-white rounded-[20px]"><b>Create Account</b></button>
+                <p class="text-center text-[#4a556a] text-[14px] md:text-[16px]">already have an account? <a href="index.php" class="text-[#507156]">Sign In</a></p>
             </form>
         </div>
     </div>

@@ -12,11 +12,12 @@
     justify-content: center;
     padding: 10px;
     border-radius: 13px;
-    background-color: #497152;
+    background-color: #69a275;
     height: 55px;
     width: 55px;
     margin-bottom: 10px;
     font-size: 22px;
+    border: #355e3b solid 0.5px;
 }
 
 .userInfo h1 {
@@ -26,4 +27,10 @@
 
 .userInfo p {
     color: #5b5d65;
+}
+
+@media (max-width: 768px){
+    .userInfo {
+        width: 100%;
+    }
 }

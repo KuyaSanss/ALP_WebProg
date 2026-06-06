@@ -13,4 +13,17 @@ $(document).ready(function () {
   $(document).on("click", ".hamburger-btn", function () {
     $(".nav-menu").toggleClass("active");
   });
+
+  $(document).on("click", "#profileButton", function(e){
+    e.stopPropagation();
+    $("#profileMenu").toggleClass("hidden");
+  });
+
+  $(document).on("click", function(){
+    $("#profileMenu").addClass("hidden");
+  });
+
+  $(document).on("click", "#hamburgerButton", function(){
+    $("#mobileMenu").toggleClass("hidden");
+  });
 });
