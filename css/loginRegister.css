@@ -1,0 +1,27 @@
+.approvalCard {
+    color: white;
+    text-align: center;
+}
+
+.approvalCard-number {
+    font-size: 40px;
+}
+
+.approvalCard-text {
+    font-size: 20px;
+}
+
+form div{
+    display: flex;
+    flex-direction: column;
+}
+
+form div label{
+    font-size: 20px;
+}
+
+form div input {
+    border-radius: 10px;
+    border: 1px solid gray;
+    padding: 10px;
+}
