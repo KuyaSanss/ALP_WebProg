@@ -61,6 +61,12 @@
                 <h1 class="page-title">Returns Management</h1>
                 <p class="page-subtitle">Track all returned books and late returns</p>
             </div>
+            <a href="adminReturnBook.php">
+                <button class="btn-primary">
+                    <i class="fa-solid fa-plus"></i> Return
+                </button>
+            </a>
+            
         </div>
 
         <div class="table-container">
