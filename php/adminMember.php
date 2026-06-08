@@ -47,11 +47,6 @@
             </a>
         </div>
 
-        <div class="search-bar">
-            <i class="fa-solid fa-magnifying-glass search-icon"></i>
-            <input type="text" placeholder="Search members...">
-        </div>
-
         <div class="table-container">
             <table>
                 <thead>
@@ -67,7 +62,7 @@
                 <tbody>
                     <?php if (mysqli_num_rows($result) > 0): ?>
                         <?php while($row = mysqli_fetch_assoc($result)): ?>
-                            <tr>
+                            <tr id="row-<?= $row['AnggotaID'] ?>">
                                 <td class="font-medium text-gray"><?= sprintf("MEM%03d", $row['AnggotaID']) ?></td>
                                 <td class="font-medium"><?= htmlspecialchars($row['Nama']) ?></td>
                                 <td class="text-gray"><?= htmlspecialchars($row['NIM']) ?></td>
@@ -75,15 +70,11 @@
                                 <td class="text-gray"><?= htmlspecialchars($row['NomerHandphone']) ?></td>
                                 <td>
                                     <div class="action-icons">
-                                        <a href="member_view.php?id=<?= $row['AnggotaID'] ?>" title="View Details" style="text-decoration: none;">
-                                            <i class="fa-regular fa-eye text-blue"></i>
-                                        </a>
-                                        
-                                        <a href="member_edit.php?id=<?= $row['AnggotaID'] ?>" title="Edit" style="text-decoration: none;">
+                                        <a href="adminMemberEdit.php?id=<?= $row['AnggotaID'] ?>" title="Edit" style="text-decoration: none;">
                                             <i class="fa-regular fa-pen-to-square text-green"></i>
                                         </a>
                                         
-                                        <a href="member_delete.php?id=<?= $row['AnggotaID'] ?>" title="Delete" style="text-decoration: none;" onclick="return confirm('Apakah Anda yakin ingin menghapus anggota ini?');">
+                                        <a href="javascript:void(0);" class="delete-btn" data-id="<?= $row['AnggotaID'] ?>" title="Delete" style="text-decoration: none;">
                                             <i class="fa-regular fa-trash-can text-red"></i>
                                         </a>
                                     </div>
@@ -100,6 +91,40 @@
         </div>
 
     </main>
+
+    <script>
+        $(document).ready(function() {
+            $('.delete-btn').on('click', function() {
+                // Mengambil ID Anggota dari atribut data-id
+                var memberId = $(this).data('id');
+                // Mencari elemen baris (<tr>) yang sesuai
+                var rowElement = $('#row-' + memberId);
+
+                // Tampilkan konfirmasi
+                if (confirm('Apakah Anda yakin ingin menghapus anggota ini?')) {
+                    // Eksekusi AJAX
+                    $.ajax({
+                        url: 'adminMemberDelete.php',
+                        type: 'POST',
+                        data: { id: memberId },
+                        success: function(response) {
+                            if (response.trim() === 'success') {
+                                // Jika sukses dari server, hilangkan baris tabel dengan efek memudar (fadeOut)
+                                rowElement.fadeOut(400, function() {
+                                    $(this).remove();
+                                });
+                            } else {
+                                alert('Gagal menghapus data. ' + response);
+                            }
+                        },
+                        error: function() {
+                            alert('Terjadi kesalahan komunikasi dengan server.');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
 <?php mysqli_close($conn); ?>

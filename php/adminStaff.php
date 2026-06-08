@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    require_once "adminSessionChecker.php";
 
     $host = "localhost";
     $user = "root";
@@ -12,8 +12,7 @@
         die("Koneksi gagal: " . mysqli_connect_error());
     }
 
-    // Mengambil semua data dari tabel staff
-    $sql = "SELECT StaffID, NamaStaff, Jabatan, NomerHandphone FROM staff ORDER BY StaffID ASC";
+    $sql = "SELECT StaffID, NamaStaff, Jabatan, NomerHandphone FROM staff ORDER BY StaffID DESC";
     $result = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
@@ -41,15 +40,12 @@
                 <h1 class="page-title">Staff Management</h1>
                 <p class="page-subtitle">Manage library staff members and their roles</p>
             </div>
-            <button class="btn-primary">
-                <i class="fa-solid fa-plus"></i> Add New Staff
-            </button>
-        </div>
-
-        <div class="search-bar">
-            <i class="fa-solid fa-magnifying-glass search-icon"></i>
-            <input type="text" placeholder="Search staff...">
-        </div>
+            <a href="adminStaffAdd.php" style="text-decoration: none;">
+                <button class="btn-primary">
+                    <i class="fa-solid fa-plus"></i> Add New Staff
+                </button>
+            </a>
+        </div> 
 
         <div class="table-container">
             <table>
@@ -65,7 +61,7 @@
                 <tbody>
                     <?php if (mysqli_num_rows($result) > 0): ?>
                         <?php while($row = mysqli_fetch_assoc($result)): ?>
-                            <tr>
+                            <tr id="row-<?= $row['StaffID'] ?>">
                                 <td class="text-gray"><?= sprintf("STF%03d", $row['StaffID']) ?></td>
                                 <td class="font-medium"><?= htmlspecialchars($row['NamaStaff']) ?></td>
                                 <td>
@@ -74,9 +70,12 @@
                                 <td class="text-gray"><?= htmlspecialchars($row['NomerHandphone']) ?></td>
                                 <td>
                                     <div class="action-icons">
-                                        <i class="fa-regular fa-eye text-blue" title="View"></i>
-                                        <i class="fa-regular fa-pen-to-square text-green" title="Edit"></i>
-                                        <i class="fa-regular fa-trash-can text-red" title="Delete"></i>
+                                        <a href="adminStaffEdit.php?id=<?= $row['StaffID'] ?>" title="Edit" style="text-decoration: none;">
+                                            <i class="fa-regular fa-pen-to-square text-green"></i>
+                                        </a>
+                                        <a href="javascript:void(0);" class="delete-btn" data-id="<?= $row['StaffID'] ?>" title="Delete" style="text-decoration: none;">
+                                            <i class="fa-regular fa-trash-can text-red"></i>
+                                        </a>
                                     </div>
                                 </td>
                             </tr>
@@ -91,6 +90,34 @@
         </div>
 
     </main>
+
+    <script>
+        $(document).ready(function() {
+            $('.delete-btn').on('click', function() {
+                var staffId = $(this).data('id');
+                var rowElement = $('#row-' + staffId);
+
+                if (confirm('Apakah Anda yakin ingin menghapus staff ini?')) {
+                    $.ajax({
+                        url: 'adminStaffDelete.php',
+                        type: 'POST',
+                        data: { id: staffId },
+                        success: function(response) {
+                            if (response.trim() === 'success') {
+                                rowElement.fadeOut(400, function() {
+                                    $(this).remove();
+                                });
+                            } else {
+                                alert('Gagal menghapus data. ' + response);
+                            }
+                        },
+                        error: function() {
+                            alert('Terjadi kesalahan komunikasi dengan server.');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-<?php mysqli_close($conn); ?>

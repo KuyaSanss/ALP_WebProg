@@ -34,14 +34,11 @@
                 <h1 class="page-title">Book Management</h1>
                 <p class="page-subtitle">Manage library books and inventory</p>
             </div>
-            <button class="btn-primary">
-                <i class="fa-solid fa-plus"></i> Add New Book
-            </button>
-        </div>
-
-        <div class="search-bar">
-            <i class="fa-solid fa-magnifying-glass search-icon"></i>
-            <input type="text" placeholder="Search books...">
+            <a href="adminBookAdd.php" style="text-decoration: none;">
+                <button class="btn-primary">
+                    <i class="fa-solid fa-plus"></i> Add New Book
+                </button>
+            </a>
         </div>
 
         <div class="table-container">
@@ -61,84 +58,81 @@
                 </thead>
                 <tbody>
                     <?php
-                        $query = "SELECT * FROM buku";
+                        // Urutkan dari buku terbaru
+                        $query = "SELECT * FROM buku ORDER BY BukuID DESC";
                         $result = mysqli_query($conn, $query);
 
                         while($buku = mysqli_fetch_assoc($result)){
                     ?>
-                        <tr>
+                        <tr id="row-<?= $buku['BukuID'] ?>">
                             <td>
                                 <img
-                                    src="<?php echo $buku['CoverBuku']; ?>"
-                                    alt="cover buku '<?php echo $buku['JudulBuku']; ?>'"
+                                    src="<?php echo !empty($buku['CoverBuku']) ? $buku['CoverBuku'] : 'https://via.placeholder.com/60x80?text=No+Cover'; ?>"
+                                    alt="cover buku '<?php echo htmlspecialchars($buku['JudulBuku']); ?>'"
                                     class="w-[60px] h-[80px] object-cover rounded"
                                 >
                             </td>
-
-                            <td class="font-medium">
-                                <?php echo $buku['JudulBuku']; ?>
-                            </td>
-
-                            <td class="text-gray">
-                                <?php echo $buku['ISBN']; ?>
-                            </td>
-
-                            <td class="text-gray">
-                                <?php echo $buku['NamaPengarang']; ?>
-                            </td>
-
-                            <td class="text-gray">
-                                <?php echo $buku['Penerbit']; ?>
-                            </td>
-
-                            <td class="text-gray">
-                                <?php echo $buku['TahunTerbit']; ?>
-                            </td>
-
+                            <td class="font-medium"><?php echo htmlspecialchars($buku['JudulBuku']); ?></td>
+                            <td class="text-gray"><?php echo htmlspecialchars($buku['ISBN']); ?></td>
+                            <td class="text-gray"><?php echo htmlspecialchars($buku['NamaPengarang']); ?></td>
+                            <td class="text-gray"><?php echo htmlspecialchars($buku['Penerbit']); ?></td>
+                            <td class="text-gray"><?php echo htmlspecialchars($buku['TahunTerbit']); ?></td>
                             <td>
-                                <span class="pill pill-category">
-                                    <?php echo $buku['KategoriBuku']; ?>
-                                </span>
+                                <span class="pill pill-category"><?php echo htmlspecialchars($buku['KategoriBuku']); ?></span>
                             </td>
-
                             <td>
-                                <?php
-                                    if($buku['StatusKetersediaan'] == 'Tersedia'){
-                                        echo '<span class="pill pill-success">Available</span>';
-                                    }
-                                    else{
-                                        echo '<span class="pill pill-danger">Unavailable</span>';
-                                    }
-                                ?>
+                                <?php if($buku['StatusKetersediaan'] == 'Tersedia'): ?>
+                                    <span class="pill pill-success">Available</span>
+                                <?php else: ?>
+                                    <span class="pill pill-danger">Unavailable</span>
+                                <?php endif; ?>
                             </td>
 
                             <td class="font-medium text-center">
-                                -
-                            </td>
-
-                            <td>
                                 <div class="action-icons">
-                                    <a href="detailBook.php?id=<?php echo $buku['BukuID']; ?>">
-                                        <i class="fa-regular fa-eye text-blue"></i>
-                                    </a>
-
-                                    <a href="editBook.php?id=<?php echo $buku['BukuID']; ?>">
+                                    <a href="adminBookEdit.php?id=<?php echo $buku['BukuID']; ?>">
                                         <i class="fa-regular fa-pen-to-square text-green"></i>
                                     </a>
 
-                                    <a href="deleteBook.php?id=<?php echo $buku['BukuID']; ?>">
+                                    <a href="javascript:void(0);" class="delete-btn" data-id="<?php echo $buku['BukuID']; ?>">
                                         <i class="fa-regular fa-trash-can text-red"></i>
                                     </a>
                                 </div>
                             </td>
                         </tr>
-                    <?php
-                        }
-                    ?>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
-
     </main>
+
+    <script>
+        $(document).ready(function() {
+            $('.delete-btn').on('click', function() {
+                var bookId = $(this).data('id');
+                var rowElement = $('#row-' + bookId);
+
+                if (confirm('Apakah Anda yakin ingin menghapus buku ini dari database?')) {
+                    $.ajax({
+                        url: 'adminBookDelete.php',
+                        type: 'POST',
+                        data: { id: bookId },
+                        success: function(response) {
+                            if (response.trim() === 'success') {
+                                rowElement.fadeOut(400, function() {
+                                    $(this).remove();
+                                });
+                            } else {
+                                alert('Gagal menghapus buku. ' + response);
+                            }
+                        },
+                        error: function() {
+                            alert('Terjadi kesalahan komunikasi dengan server.');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
