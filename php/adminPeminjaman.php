@@ -73,9 +73,9 @@
 
         <div class="filter-section">
             <span class="filter-label">Filter:</span>
-            <a href="borrowing.php?filter=All" class="btn-filter <?= ($current_filter == 'All') ? 'active' : '' ?>">All</a>
-            <a href="borrowing.php?filter=Active" class="btn-filter <?= ($current_filter == 'Active') ? 'active' : '' ?>">Active</a>
-            <a href="borrowing.php?filter=Late" class="btn-filter <?= ($current_filter == 'Late') ? 'active' : '' ?>">Late</a>
+            <a href="adminPeminjaman.php?filter=All" class="btn-filter <?= ($current_filter == 'All') ? 'active' : '' ?>">All</a>
+            <a href="adminPeminjaman.php?filter=Active" class="btn-filter <?= ($current_filter == 'Active') ? 'active' : '' ?>">Active</a>
+            <a href="adminPeminjaman.php?filter=Late" class="btn-filter <?= ($current_filter == 'Late') ? 'active' : '' ?>">Late</a>
         </div>
 
         <div class="table-container">

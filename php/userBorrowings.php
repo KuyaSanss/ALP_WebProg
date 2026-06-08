@@ -14,12 +14,19 @@
     }
 
     $sqlDendaBelumBayar = "
-    SELECT SUM(d.NominalBayar) AS total
-    FROM denda d
+    SELECT
+        SUM(
+            DATEDIFF(
+                CURDATE(),
+                p.TanggalTenggatPengembalian
+            ) * 5000
+        ) AS total
+    FROM detailpeminjaman dp
     JOIN peminjaman p
-    ON d.PeminjamanID = p.PeminjamanID
+    ON dp.PeminjamanID = p.PeminjamanID
     WHERE p.AnggotaID = $idAnggota
-    AND d.StatusPembayaran = 'Belum Bayar'
+    AND dp.StatusPeminjaman = 'Dipinjam'
+    AND CURDATE() > p.TanggalTenggatPengembalian
     ";
 
     $resultDendaBelumBayar = mysqli_query($conn, $sqlDendaBelumBayar);

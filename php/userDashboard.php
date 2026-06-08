@@ -47,12 +47,19 @@
 
     // Denda Belum Dibayar
     $sqlDendaBelumBayar = "
-    SELECT SUM(d.NominalBayar) AS total
-    FROM denda d
+    SELECT
+        SUM(
+            DATEDIFF(
+                CURDATE(),
+                p.TanggalTenggatPengembalian
+            ) * 5000
+        ) AS total
+    FROM detailpeminjaman dp
     JOIN peminjaman p
-    ON d.PeminjamanID = p.PeminjamanID
+    ON dp.PeminjamanID = p.PeminjamanID
     WHERE p.AnggotaID = $idAnggota
-    AND d.StatusPembayaran = 'Belum Bayar'
+    AND dp.StatusPeminjaman = 'Dipinjam'
+    AND CURDATE() > p.TanggalTenggatPengembalian
     ";
 
     $resultDendaBelumBayar = mysqli_query($conn, $sqlDendaBelumBayar);
@@ -61,21 +68,6 @@
     $jumlahDendaBelumBayar = $dataDendaBelumBayar['total'] ?? 0;
 
     // buku dipinjam
-    $sqlDendaBelumBayar = "
-    SELECT SUM(d.NominalBayar) AS total
-    FROM denda d
-    JOIN peminjaman p
-    ON d.PeminjamanID = p.PeminjamanID
-    WHERE p.AnggotaID = $idAnggota
-    AND d.StatusPembayaran = 'Belum Bayar'
-    ";
-
-    $resultDendaBelumBayar = mysqli_query($conn, $sqlDendaBelumBayar);
-    $dataDendaBelumBayar = mysqli_fetch_assoc($resultDendaBelumBayar);
-
-    $jumlahDendaBelumBayar = $dataDendaBelumBayar['total'] ?: 0;
-
-
     $sqlBukuDipinjam = "
     SELECT
         b.JudulBuku,
@@ -182,15 +174,58 @@
                                 </div>
 
                                 <div>
-                                    <?php if(strtotime($buku['TanggalTenggatPengembalian']) < strtotime(date('Y-m-d'))){ ?>
-                                        <span class="bg-red-100 text-red-700 px-[15px] py-[8px] rounded-full font-semibold">
-                                            Due
-                                        </span>
+                                    <?php
+
+                                    $dendaRealtime = 0;
+
+                                    if(
+                                        strtotime($buku['TanggalTenggatPengembalian'])
+                                        <
+                                        strtotime(date('Y-m-d'))
+                                    ){
+
+                                        $hariTerlambat = floor(
+                                            (
+                                                strtotime(date('Y-m-d'))
+                                                -
+                                                strtotime(
+                                                    $buku['TanggalTenggatPengembalian']
+                                                )
+                                            ) / 86400
+                                        );
+
+                                        $dendaRealtime =
+                                        $hariTerlambat * 5000;
+                                    }
+                                    ?>
+
+                                    <?php if($dendaRealtime > 0){ ?>
+
+                                        <div class="flex flex-col items-end gap-[8px]">
+
+                                            <span class="bg-red-100 text-red-700 px-[15px] py-[8px] rounded-full font-semibold">
+                                                Due
+                                            </span>
+
+                                            <span class="text-red-600 font-semibold">
+                                                Fine: Rp <?=
+                                                number_format(
+                                                    $dendaRealtime,
+                                                    0,
+                                                    ',',
+                                                    '.'
+                                                );
+                                                ?>
+                                            </span>
+
+                                        </div>
 
                                     <?php } else { ?>
+
                                         <span class="bg-green-100 text-green-700 px-[15px] py-[8px] rounded-full font-semibold">
                                             Aktif
                                         </span>
+
                                     <?php } ?>
                                 </div>
                             </div>
