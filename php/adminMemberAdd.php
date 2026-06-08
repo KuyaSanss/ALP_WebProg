@@ -25,7 +25,7 @@
 
         if (mysqli_query($conn, $sql)) {
             // Jika berhasil disimpan, langsung arahkan kembali ke halaman Member
-            header("Location: member.php");
+            header("Location: adminMember.php");
             exit;
         } else {
             $error_message = "Error: " . $sql . "<br>" . mysqli_error($conn);
@@ -39,31 +39,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add New Member - Knowledge Journey</title>
     <link rel="stylesheet" href="../css/book.css">
+    <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="../js/globalJS.js"></script>
 </head>
 <body>
-
-    <header class="navbar">
-        <div class="logo">
-            <div class="logo-icon"><i class="fa-solid fa-book-open"></i></div>
-            <span class="logo-text">Knowledge Journey</span>
-        </div>
-        
-        <nav class="nav-links">
-            <a href="index.php"><i class="fa-solid fa-house"></i> Dashboard</a>
-            <a href="member.php" class="active"><i class="fa-solid fa-users"></i> Members</a>
-            <a href="book.php"><i class="fa-solid fa-book"></i> Books</a>
-            <a href="staff.php"><i class="fa-solid fa-user-tie"></i> Staff</a>
-            <a href="peminjaman.php"><i class="fa-solid fa-clipboard-list"></i> Borrowing</a>
-            <a href="pengembalian.php"><i class="fa-solid fa-rotate-left"></i> Returns</a>
-            <a href="denda.php"><i class="fa-solid fa-dollar-sign"></i> Fines</a>
-        </nav>
-
-        <div class="nav-actions">
-            <div class="avatar">A</div>
-        </div>
-    </header>
+    <div id="adminNavBarPosition"></div>
 
     <main class="main-container">
         
@@ -72,7 +57,7 @@
                 <h1 class="page-title">Add New Member</h1>
                 <p class="page-subtitle">Register a new student to the library system</p>
             </div>
-            <a href="member.php" style="text-decoration: none;">
+            <a href="adminMember.php" style="text-decoration: none;">
                 <button class="btn-secondary">
                     <i class="fa-solid fa-arrow-left"></i> Back to Members
                 </button>
@@ -111,7 +96,7 @@
                 </div>
 
                 <div class="form-actions">
-                    <a href="member.php" style="text-decoration: none;">
+                    <a href="adminMember.php" style="text-decoration: none;">
                         <button type="button" class="btn-secondary">Cancel</button>
                     </a>
                     <button type="submit" class="btn-primary">

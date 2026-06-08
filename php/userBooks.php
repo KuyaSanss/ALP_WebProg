@@ -114,7 +114,7 @@
                         <?php echo $buku['NamaPengarang']; ?>
                     </p>
                     <div class="flex justify-center md:justify-end mt-[20px]">
-                        <a href="detailBuku.php?id=<?php echo $buku['BukuID']; ?>" class="text-[#4d6f4e] font-semibold hover:underline">
+                        <a href="userDetailBuku.php?id=<?php echo $buku['BukuID']; ?>" class="text-[#4d6f4e] font-semibold hover:underline">
                             <i class="fas fa-book-open"></i>
                             Lihat Detail
                         </a>

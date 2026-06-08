@@ -22,12 +22,6 @@
     font-family: 'Inter', sans-serif;
 }
 
-body {
-    background-color: var(--bg-color);
-    color: var(--text-main);
-    min-height: 100vh;
-}
-
 .navbar {
     background-color: var(--nav-bg);
     display: flex;
