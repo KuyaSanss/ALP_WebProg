@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    require_once "userSessionChecker.php";
 
     $host = "localhost";
     $user = "root";

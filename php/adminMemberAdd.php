@@ -1,4 +1,5 @@
 <?php
+    require_once "adminSessionChecker.php";
     session_start();
 
     $host = "localhost";

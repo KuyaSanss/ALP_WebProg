@@ -1,4 +1,5 @@
 <?php
+    require_once "adminSessionChecker.php";
     $host = "localhost";
     $user = "root";
     $password = "";
