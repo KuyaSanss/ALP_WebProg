@@ -53,7 +53,7 @@
     <a href="adminDashboard.php">
         <div class="logoDiv gap-[7px] text-[#3e5f44] text-[20px]">
             <img src="Logo.png" alt="logo" class="logo">
-            <b><p>Knowlede Journey</p></b>
+            <b><p>Knowledge Journey</p></b>
         </div>
     </a>
     

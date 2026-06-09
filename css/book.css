@@ -278,11 +278,9 @@ td {
     color: #EF4444;
 }
 
-/* ... (Gunakan semua kode style.css dari halaman Book Management sebelumnya) ... */
 
-/* Tambahan untuk Pill Staff Position (Biru) */
 :root {
-    /* ... variabel yang sudah ada ... */
+
     --pill-blue-bg: #E0E7FF;
     --pill-blue-text: #4338CA;
 }
@@ -292,11 +290,7 @@ td {
     color: var(--pill-blue-text);
 }
 
-/* =========================================
-   TAMBAHAN UNTUK HALAMAN BORROWING
-   ========================================= */
 
-/* Filter Section */
 .filter-section {
     display: flex;
     align-items: center;
@@ -330,7 +324,6 @@ td {
     color: white;
 }
 
-/* Tabel Ikon */
 .table-icon {
     color: #9CA3AF;
     margin-right: 8px;
@@ -338,30 +331,23 @@ td {
     text-align: center;
 }
 
-/* Teks Merah untuk Due Date yang Late */
+
 .text-red-date {
     color: var(--pill-danger-text);
 }
 
-/* =========================================
-   TAMBAHAN UNTUK HALAMAN RETURNS
-   ========================================= */
 
-/* Warna khusus untuk kolom Fine (Denda) */
+
 .text-green-fine {
     color: #10B981;
-    /* Hijau untuk $0.00 */
+    
 }
 
 .text-red-fine {
     color: #EF4444;
-    /* Merah untuk denda > $0.00 */
 }
 
 
-/* =========================================
-   TAMBAHAN UNTUK HALAMAN FINES (SUMMARY CARDS)
-   ========================================= */
 
 .summary-cards {
     display: grid;
@@ -393,17 +379,15 @@ td {
 
 .icon-red {
     background-color: #EF4444;
-    /* Merah untuk Unpaid */
 }
 
 .icon-green {
     background-color: #10B981;
-    /* Hijau untuk Paid */
 }
 
 .icon-blue {
     background-color: #3B82F6;
-    /* Biru untuk Total */
+
 }
 
 .card-title {
@@ -418,9 +402,6 @@ td {
     font-weight: 700;
 }
 
-/* =========================================
-   TAMBAHAN UNTUK ADMIN DASHBOARD
-   ========================================= */
 
 .dashboard-metrics {
     display: grid;
@@ -453,7 +434,6 @@ td {
     font-size: 18px;
 }
 
-/* Warna Latar Belakang Ikon Card */
 .bg-green-light {
     background-color: #DEF7EC;
 }
@@ -510,7 +490,6 @@ td {
     color: #6B7280;
 }
 
-/* Grid Bawah (Aktivitas dan Sidebar) */
 .dashboard-grid {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -524,7 +503,6 @@ td {
     color: #111827;
 }
 
-/* Recent Activities */
 .recent-activities {
     background: white;
     border-radius: 12px;
@@ -578,7 +556,6 @@ td {
     color: #9CA3AF;
 }
 
-/* Quick Actions */
 .quick-actions {
     background: white;
     border-radius: 12px;
@@ -627,7 +604,6 @@ td {
     background-color: #3B82F6;
 }
 
-/* System Health */
 .system-health {
     background: #315343;
     border-radius: 12px;
@@ -673,11 +649,6 @@ td {
     opacity: 0.8;
 }
 
-/* =========================================
-   STYLE KHUSUS UNTUK FORM (ADD / EDIT)
-   ========================================= */
-
-/* Wadah utama form (kotak putih) */
 .form-container {
     background-color: #FFFFFF;
     border-radius: 12px;
@@ -687,30 +658,26 @@ td {
     margin-top: 20px;
 }
 
-/* Grid untuk menyejajarkan inputan menjadi 2 kolom */
 .form-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
 
-/* Grup pembungkus untuk Label dan Input */
 .form-group {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
 }
 
-/* Teks Label di atas kotak input */
 .form-label {
     font-size: 14px;
     font-weight: 600;
     color: #374151;
-    /* Abu-abu gelap */
     margin-bottom: 8px;
 }
 
-/* Kotak Input dan Textarea */
+
 .form-control {
     width: 100%;
     padding: 12px 15px;
@@ -719,29 +686,25 @@ td {
     font-size: 14px;
     color: #1F2937;
     background-color: #F9FAFB;
-    /* Sedikit abu-abu saat belum diklik */
     transition: all 0.2s ease;
     font-family: 'Inter', sans-serif;
     box-sizing: border-box;
-    /* Mencegah input melebar keluar batas */
+
 }
 
-/* Efek menyala saat kotak input diklik (Fokus) */
+
 .form-control:focus {
     outline: none;
     border-color: #315343;
-    /* Warna hijau utama */
     background-color: #FFFFFF;
     box-shadow: 0 0 0 3px rgba(49, 83, 67, 0.1);
 }
 
-/* Khusus Textarea (Alamat) agar bisa diperbesar ke bawah */
 textarea.form-control {
     resize: vertical;
     min-height: 100px;
 }
 
-/* Area tombol di bagian bawah form */
 .form-actions {
     display: flex;
     justify-content: flex-end;
@@ -749,10 +712,8 @@ textarea.form-control {
     margin-top: 20px;
     padding-top: 20px;
     border-top: 1px solid #E5E7EB;
-    /* Garis pemisah tipis */
 }
 
-/* Tombol Secondary (Tombol Cancel / Back) */
 .btn-secondary {
     background-color: #FFFFFF;
     color: #374151;
