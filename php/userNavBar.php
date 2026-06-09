@@ -11,7 +11,7 @@
 <nav class="w-screen bg-white fixed top-0 left-0 shadow-md p-[15px] pl-[30px] pr-[30px] flex justify-between z-[9999]">
     <a href="userDashboard.php">
         <div class="logoDiv gap-[7px] text-[#3e5f44] text-[20px]">
-            <img src="https://img.freepik.com/premium-vector/lorem-ipsum-logo-design-colorful-gradient_779267-46.jpg?w=2000" alt="logo" class="logo">
+            <img src="Logo.png" alt="logo" class="logo">
             <b><p>Knowlede Journey</p></b>
         </div>
     </a>

@@ -58,7 +58,7 @@
     <div class="flex">
         <div class="hidden md:block bg-[radial-gradient(circle_at_50%_50%,#6d9b79_0%,#679573_35%,#578663_100%)] w-[50%] min-h-screen p-20">
             <div class="flex text-white text-[30px] items-center gap-[20px]">
-                <img src="https://img.freepik.com/premium-vector/lorem-ipsum-logo-design-colorful-gradient_779267-46.jpg?w=2000" alt="logo" class="logo">
+                <img src="Logo.png" alt="logo" class="logo">
                 <p>
                     <b>Knowledge journey</b>
                 </p>
@@ -133,7 +133,7 @@
         <div class="w-full md:w-[50%] pt-10 pb-10 px-6 md:pl-20 md:pr-20 flex flex-col gap-12 md:gap-20 max-w-[700px] mx-auto">
             <div>
                 <div class="flex md:hidden items-center gap-[12px] mb-[20px]">
-                    <img src="https://img.freepik.com/premium-vector/lorem-ipsum-logo-design-colorful-gradient_779267-46.jpg?w=2000" alt="logo" class="w-[50px] h-[50px] rounded-full">
+                    <img src="Logo.png" alt="logo" class="w-[50px] h-[50px] rounded-full">
                     <p class="text-[22px] font-bold text-[#3e5f44]">
                         Knowledge Journey
                     </p>

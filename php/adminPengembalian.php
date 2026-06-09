@@ -11,11 +11,6 @@
     if (!$conn) {
         die("Koneksi gagal: " . mysqli_connect_error());
     }
-
-    /* Query ini memulai pencarian dari tabel detailpeminjaman (dp) 
-       karena status 'Dikembalikan' dan data spesifik buku ada di sana.
-       Kemudian di-JOIN ke peminjaman (p), anggota (a), buku (b), dan denda (d).
-    */
     $sql = "SELECT 
                 dp.DetailPeminjamanID, 
                 a.Nama AS member_name, 
@@ -49,7 +44,7 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="../js/globalJS.js"></script>
+    <script src="../js/adminJS.js"></script>
 </head>
 <body>
     <div id="adminNavBarPosition"></div>

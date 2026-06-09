@@ -1,6 +1,5 @@
 $(document).ready(function () {
-  // USer
-  $("#navBarPosition").load("../php/userNavBar.php", function () {
+  $("#adminNavBarPosition").load("../php/adminNavBar.php", function () {
     var currentPage = window.location.pathname.split("/").pop();
 
     $(".navLink").each(function () {

@@ -12,8 +12,6 @@
         die("Koneksi gagal: " . mysqli_connect_error());
     }
 
-    // 1. Mengambil data untuk Summary Cards di bagian atas
-    // Menghitung berdasarkan enum 'Lunas' dan 'Belum Bayar' yang ada di database Anda
     $summary_sql = "SELECT 
                         SUM(NominalBayar) as total_fines,
                         SUM(CASE WHEN StatusPembayaran = 'Lunas' THEN NominalBayar ELSE 0 END) as total_paid,
@@ -26,10 +24,6 @@
     $total_paid = $summary['total_paid'] ? $summary['total_paid'] : 0;
     $total_unpaid = $summary['total_unpaid'] ? $summary['total_unpaid'] : 0;
 
-    // 2. Mengambil parameter filter dari URL
-    $current_filter = isset($_GET['filter']) ? $_GET['filter'] : 'All';
-
-    // 3. Menyiapkan query untuk tabel utama
     $sql = "SELECT 
                 d.DendaID, 
                 a.Nama AS member_name, 
@@ -40,13 +34,6 @@
             FROM denda d
             JOIN peminjaman p ON d.PeminjamanID = p.PeminjamanID
             JOIN anggota a ON p.AnggotaID = a.AnggotaID";
-
-    // Filter berdasarkan status
-    if ($current_filter == 'Unpaid') {
-        $sql .= " WHERE d.StatusPembayaran = 'Belum Bayar'";
-    } elseif ($current_filter == 'Paid') {
-        $sql .= " WHERE d.StatusPembayaran = 'Lunas'";
-    }
     
     $sql .= " ORDER BY d.DendaID DESC";
 
@@ -65,7 +52,7 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="../js/globalJS.js"></script>
+    <script src="../js/adminJS.js"></script>
 </head>
 <body>
     <div id="adminNavBarPosition"></div>
@@ -81,26 +68,6 @@
 
         <div class="summary-cards">
             <div class="summary-card">
-                <div class="card-icon icon-red">
-                    <i class="fa-solid fa-rupiah-sign"></i>
-                </div>
-                <div class="card-info">
-                    <p class="card-title">Total Unpaid</p>
-                    <h3 class="card-amount">Rp <?= number_format($total_unpaid, 0, ',', '.') ?></h3>
-                </div>
-            </div>
-
-            <div class="summary-card">
-                <div class="card-icon icon-green">
-                    <i class="fa-solid fa-rupiah-sign"></i>
-                </div>
-                <div class="card-info">
-                    <p class="card-title">Total Paid</p>
-                    <h3 class="card-amount">Rp <?= number_format($total_paid, 0, ',', '.') ?></h3>
-                </div>
-            </div>
-
-            <div class="summary-card">
                 <div class="card-icon icon-blue">
                     <i class="fa-solid fa-rupiah-sign"></i>
                 </div>
@@ -109,13 +76,6 @@
                     <h3 class="card-amount">Rp <?= number_format($total_fines, 0, ',', '.') ?></h3>
                 </div>
             </div>
-        </div>
-
-        <div class="filter-section">
-            <span class="filter-label">Filter:</span>
-            <a href="fines.php?filter=All" class="btn-filter <?= ($current_filter == 'All') ? 'active' : '' ?>">All</a>
-            <a href="fines.php?filter=Unpaid" class="btn-filter <?= ($current_filter == 'Unpaid') ? 'active' : '' ?>">Unpaid</a>
-            <a href="fines.php?filter=Paid" class="btn-filter <?= ($current_filter == 'Paid') ? 'active' : '' ?>">Paid</a>
         </div>
 
         <div class="table-container">

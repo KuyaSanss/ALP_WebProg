@@ -12,15 +12,12 @@
         die("Koneksi gagal: " . mysqli_connect_error());
     }
 
-    // 1. Total Books
     $q_books = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as total FROM buku"));
     $total_books = $q_books['total'];
 
-    // 2. Active Borrowings
     $q_borrow = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as total FROM detailpeminjaman WHERE StatusPeminjaman = 'Dipinjam'"));
     $active_borrowings = $q_borrow['total'];
 
-    // 3. Late Returns
     $q_late = mysqli_fetch_assoc(mysqli_query($conn, "
         SELECT COUNT(*) as total 
         FROM detailpeminjaman dp 
@@ -29,19 +26,15 @@
     "));
     $late_returns = $q_late['total'];
 
-    // 4. Total Members
     $q_members = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as total FROM anggota"));
     $total_members = $q_members['total'];
 
-    // 5. Staff Members
     $q_staff = mysqli_fetch_assoc(mysqli_query($conn, "SELECT COUNT(*) as total FROM staff"));
     $total_staff = $q_staff['total'];
 
-    // 6. Unpaid Fines
     $q_fines = mysqli_fetch_assoc(mysqli_query($conn, "SELECT SUM(NominalBayar) as total FROM denda WHERE StatusPembayaran = 'Belum Bayar'"));
     $unpaid_fines = $q_fines['total'] ? $q_fines['total'] : 0;
 
-    // 7. Recent Activities (Menarik 5 peminjaman terbaru)
     $q_recent = mysqli_query($conn, "
         SELECT a.Nama, b.JudulBuku, p.TanggalPeminjaman 
         FROM detailpeminjaman dp
@@ -64,7 +57,7 @@
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="../js/globalJS.js"></script>
+    <script src="../js/adminJS.js"></script>
 </head>
 <body>
     <div id="adminNavBarPosition"></div>

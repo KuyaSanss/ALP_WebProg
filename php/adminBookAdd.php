@@ -19,13 +19,6 @@
 
         $sql = "INSERT INTO buku (JudulBuku, ISBN, NamaPengarang, Penerbit, TahunTerbit, KategoriBuku, CoverBuku, StatusKetersediaan) 
                 VALUES ('$judul', '$isbn', '$pengarang', '$penerbit', $tahun, '$kategori', '$cover', 'Tersedia')";
-
-        if (mysqli_query($conn, $sql)) {
-            header("Location: adminBook.php"); // Ganti nama file ini sesuai file utama buku Anda
-            exit;
-        } else {
-            $error_message = "Error: " . mysqli_error($conn);
-        }
     }
 ?>
 <!DOCTYPE html>
@@ -37,7 +30,7 @@
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="../js/globalJS.js"></script>
+    <script src="../js/adminJS.js"></script>
 </head>
 <body>
     <div id="adminNavBarPosition"></div>
@@ -65,32 +58,32 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label class="form-label" for="judul">Book Title</label>
-                        <input type="text" id="judul" name="judul" class="form-control" placeholder="Enter book title" required>
+                        <input type="text" id="judul" name="judul" class="form-control break-all" placeholder="Enter book title" required>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label" for="isbn">ISBN</label>
-                        <input type="text" id="isbn" name="isbn" class="form-control" placeholder="Enter ISBN number" required>
+                        <input type="text" id="isbn" name="isbn" class="form-control break-all" placeholder="Enter ISBN number" required>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label" for="pengarang">Author</label>
-                        <input type="text" id="pengarang" name="pengarang" class="form-control" placeholder="Enter author's name" required>
+                        <input type="text" id="pengarang" name="pengarang" class="form-control break-all" placeholder="Enter author's name" required>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label" for="penerbit">Publisher</label>
-                        <input type="text" id="penerbit" name="penerbit" class="form-control" placeholder="Enter publisher's name" required>
+                        <input type="text" id="penerbit" name="penerbit" class="form-control break-all" placeholder="Enter publisher's name" required>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label" for="tahun">Publication Year</label>
-                        <input type="number" id="tahun" name="tahun" class="form-control" placeholder="e.g. 2024" required>
+                        <input type="number" id="tahun" name="tahun" class="form-control break-all" placeholder="e.g. 2024" required>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label" for="kategori">Category</label>
-                        <select id="kategori" name="kategori" class="form-control" required>
+                        <select id="kategori" name="kategori" class="form-control break-all" required>
                             <option value="" disabled selected>Select category...</option>
                             <option value="Novel">Novel</option>
                             <option value="Komik">Komik</option>
@@ -105,7 +98,7 @@
 
                 <div class="form-group" style="margin-top: 20px;">
                     <label class="form-label" for="cover">Cover Image URL</label>
-                    <input type="text" id="cover" name="cover" class="form-control" placeholder="Enter image URL link (https://...)">
+                    <input type="text" id="cover" name="cover" class="form-control break-all" placeholder="Enter image URL link (https://...)">
                 </div>
 
                 <div class="form-actions">

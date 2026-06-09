@@ -8,7 +8,6 @@
 
     $conn = mysqli_connect($host, $user, $password, $database);
 
-    // 1. PROSES UPDATE
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $id = intval($_POST['id']);
         $judul = mysqli_real_escape_string($conn, $_POST['judul']);
@@ -27,14 +26,13 @@
                        WHERE BukuID = $id";
 
         if (mysqli_query($conn, $update_sql)) {
-            header("Location: adminBook.php"); // Sesuaikan nama file utama buku
+            header("Location: adminBook.php");
             exit;
         } else {
             $error_message = "Error: " . mysqli_error($conn);
         }
     }
 
-    // 2. AMBIL DATA AWAL
     if (isset($_GET['id'])) {
         $id = intval($_GET['id']);
         $result = mysqli_query($conn, "SELECT * FROM buku WHERE BukuID = $id");
@@ -44,7 +42,7 @@
             die("Data buku tidak ditemukan!");
         }
     } else {
-        header("Location: book.php"); // Sesuaikan
+        header("Location: book.php"); 
         exit;
     }
 ?>
@@ -57,7 +55,7 @@
     <link rel="stylesheet" href="../css/global.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script src="../js/globalJS.js"></script>
+    <script src="../js/adminJS.js"></script>
 </head>
 <body>
     <div id="adminNavBarPosition"></div>

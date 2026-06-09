@@ -1,20 +1,3 @@
-:root {
-    --bg-color: #EAF4E2;
-    --nav-bg: #FFFFFF;
-    --text-main: #1F2937;
-    --text-muted: #6B7280;
-    --primary-color: #315343; 
-    --border-color: #E5E7EB;
-    
-
-    --pill-success-bg: #DEF7EC;
-    --pill-success-text: #03543F;
-    --pill-danger-bg: #FDE8E8;
-    --pill-danger-text: #9B1C1C;
-    --pill-category-bg: #F3F4F6;
-    --pill-category-text: #4B5563;
-}
-
 * {
     margin: 0;
     padding: 0;
@@ -28,7 +11,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px 30px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 .logo {
@@ -91,7 +74,10 @@
     cursor: pointer;
 }
 
-.position-relative { position: relative; }
+.position-relative {
+    position: relative;
+}
+
 .badge {
     position: absolute;
     top: -2px;
@@ -152,9 +138,6 @@
     gap: 8px;
     font-size: 14px;
     transition: background-color 0.2s;
-}
-
-.btn-primary:hover {
     background-color: #244234;
 }
 
@@ -166,7 +149,7 @@
     align-items: center;
     gap: 10px;
     margin-bottom: 20px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
 .search-bar input {
@@ -177,13 +160,15 @@
     color: var(--text-main);
 }
 
-.search-icon { color: var(--text-muted); }
+.search-icon {
+    color: var(--text-muted);
+}
 
 .table-container {
     background-color: white;
     border-radius: 12px;
     overflow: auto;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 table {
@@ -192,7 +177,9 @@ table {
     text-align: left;
 }
 
-thead { background-color: #FAFAFA; }
+thead {
+    background-color: #FAFAFA;
+}
 
 th {
     padding: 16px 20px;
@@ -209,9 +196,19 @@ td {
     vertical-align: middle;
 }
 
-.font-medium { font-weight: 500; }
-.text-gray { color: var(--text-muted); font-size: 13px; line-height: 1.4;}
-.text-center { text-align: center; }
+.font-medium {
+    font-weight: 500;
+}
+
+.text-gray {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.text-center {
+    text-align: center;
+}
 
 .book-cover {
     width: 45px;
@@ -219,9 +216,18 @@ td {
     border-radius: 4px;
     background-color: #ddd;
 }
-.cover-1 { background: linear-gradient(to bottom, #1e293b, #0f172a); }
-.cover-2 { background: linear-gradient(to bottom, #d97706, #b45309); }
-.cover-3 { background: linear-gradient(to bottom, #3f3f46, #18181b); }
+
+.cover-1 {
+    background: linear-gradient(to bottom, #1e293b, #0f172a);
+}
+
+.cover-2 {
+    background: linear-gradient(to bottom, #d97706, #b45309);
+}
+
+.cover-3 {
+    background: linear-gradient(to bottom, #3f3f46, #18181b);
+}
 
 .pill {
     padding: 4px 12px;
@@ -255,10 +261,22 @@ td {
     justify-content: center;
 }
 
-.action-icons i { cursor: pointer; font-size: 16px; }
-.text-blue { color: #3B82F6; }
-.text-green { color: #10B981; }
-.text-red { color: #EF4444; }
+.action-icons i {
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.text-blue {
+    color: #3B82F6;
+}
+
+.text-green {
+    color: #10B981;
+}
+
+.text-red {
+    color: #EF4444;
+}
 
 /* ... (Gunakan semua kode style.css dari halaman Book Management sebelumnya) ... */
 
@@ -308,14 +326,13 @@ td {
 }
 
 .btn-filter.active {
-    background-color: var(--primary-color);
+    background-color: #487051;
     color: white;
-    border-color: var(--primary-color);
 }
 
 /* Tabel Ikon */
 .table-icon {
-    color: #9CA3AF; 
+    color: #9CA3AF;
     margin-right: 8px;
     width: 16px;
     text-align: center;
@@ -332,11 +349,13 @@ td {
 
 /* Warna khusus untuk kolom Fine (Denda) */
 .text-green-fine {
-    color: #10B981; /* Hijau untuk $0.00 */
+    color: #10B981;
+    /* Hijau untuk $0.00 */
 }
 
 .text-red-fine {
-    color: #EF4444; /* Merah untuk denda > $0.00 */
+    color: #EF4444;
+    /* Merah untuk denda > $0.00 */
 }
 
 
@@ -358,7 +377,7 @@ td {
     display: flex;
     align-items: center;
     gap: 15px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .card-icon {
@@ -373,15 +392,18 @@ td {
 }
 
 .icon-red {
-    background-color: #EF4444; /* Merah untuk Unpaid */
+    background-color: #EF4444;
+    /* Merah untuk Unpaid */
 }
 
 .icon-green {
-    background-color: #10B981; /* Hijau untuk Paid */
+    background-color: #10B981;
+    /* Hijau untuk Paid */
 }
 
 .icon-blue {
-    background-color: #3B82F6; /* Biru untuk Total */
+    background-color: #3B82F6;
+    /* Biru untuk Total */
 }
 
 .card-title {
@@ -411,7 +433,7 @@ td {
     background: white;
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
 .metric-header {
@@ -432,20 +454,61 @@ td {
 }
 
 /* Warna Latar Belakang Ikon Card */
-.bg-green-light { background-color: #DEF7EC; }
-.text-green-dark { color: #03543F; }
-.bg-red-light { background-color: #FDE8E8; }
-.text-red-dark { color: #9B1C1C; }
-.bg-blue-light { background-color: #E0E7FF; }
-.text-blue-dark { color: #4338CA; }
-.bg-orange-light { background-color: #FEF3C7; }
-.text-orange-dark { color: #D97706; }
+.bg-green-light {
+    background-color: #DEF7EC;
+}
 
-.trend-up { color: #10B981; font-size: 13px; font-weight: 600; }
-.trend-down { color: #EF4444; font-size: 13px; font-weight: 600; }
+.text-green-dark {
+    color: #03543F;
+}
 
-.metric-value { font-size: 28px; font-weight: 700; color: #111827; margin-bottom: 5px; }
-.metric-label { font-size: 14px; color: #6B7280; }
+.bg-red-light {
+    background-color: #FDE8E8;
+}
+
+.text-red-dark {
+    color: #9B1C1C;
+}
+
+.bg-blue-light {
+    background-color: #E0E7FF;
+}
+
+.text-blue-dark {
+    color: #4338CA;
+}
+
+.bg-orange-light {
+    background-color: #FEF3C7;
+}
+
+.text-orange-dark {
+    color: #D97706;
+}
+
+.trend-up {
+    color: #10B981;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.trend-down {
+    color: #EF4444;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.metric-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 5px;
+}
+
+.metric-label {
+    font-size: 14px;
+    color: #6B7280;
+}
 
 /* Grid Bawah (Aktivitas dan Sidebar) */
 .dashboard-grid {
@@ -454,17 +517,27 @@ td {
     gap: 20px;
 }
 
-.section-title { font-size: 16px; font-weight: 600; margin-bottom: 15px; color: #111827; }
+.section-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #111827;
+}
 
 /* Recent Activities */
 .recent-activities {
     background: white;
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
 }
 
-.activity-list { display: flex; flex-direction: column; gap: 15px; }
+.activity-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 .activity-item {
     display: flex;
     align-items: center;
@@ -472,36 +545,87 @@ td {
     padding-bottom: 15px;
     border-bottom: 1px solid #F3F4F6;
 }
-.activity-item:last-child { border-bottom: none; padding-bottom: 0; }
-.activity-icon {
-    width: 35px; height: 35px; border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
+
+.activity-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
 }
-.activity-details h4 { font-size: 14px; color: #111827; font-weight: 600; }
-.activity-details p { font-size: 13px; color: #6B7280; margin-top: 2px;}
-.activity-time { margin-left: auto; font-size: 12px; color: #9CA3AF; }
+
+.activity-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.activity-details h4 {
+    font-size: 14px;
+    color: #111827;
+    font-weight: 600;
+}
+
+.activity-details p {
+    font-size: 13px;
+    color: #6B7280;
+    margin-top: 2px;
+}
+
+.activity-time {
+    margin-left: auto;
+    font-size: 12px;
+    color: #9CA3AF;
+}
 
 /* Quick Actions */
 .quick-actions {
     background: white;
     border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
     margin-bottom: 20px;
 }
-.action-btn {
-    display: flex; align-items: center; gap: 10px;
-    padding: 12px 15px; border-radius: 8px; color: white;
-    text-decoration: none; font-size: 14px; font-weight: 500;
-    margin-bottom: 10px; transition: opacity 0.2s;
-}
-.action-btn:last-child { margin-bottom: 0; }
-.action-btn:hover { opacity: 0.9; }
 
-.btn-dark-green { background-color: #315343; }
-.btn-mid-green { background-color: #558B6E; }
-.btn-light-green { background-color: #88C0A0; color: #0b1f14; font-weight: 600;}
-.btn-blue { background-color: #3B82F6; }
+.action-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    border-radius: 8px;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    transition: opacity 0.2s;
+}
+
+.action-btn:last-child {
+    margin-bottom: 0;
+}
+
+.action-btn:hover {
+    opacity: 0.9;
+}
+
+.btn-dark-green {
+    background-color: #315343;
+}
+
+.btn-mid-green {
+    background-color: #558B6E;
+}
+
+.btn-light-green {
+    background-color: #88C0A0;
+    color: #0b1f14;
+    font-weight: 600;
+}
+
+.btn-blue {
+    background-color: #3B82F6;
+}
 
 /* System Health */
 .system-health {
@@ -510,18 +634,44 @@ td {
     padding: 20px;
     color: white;
 }
-.text-white { color: white !important; }
+
+.text-white {
+    color: white !important;
+}
+
 .health-item {
-    display: flex; justify-content: space-between; align-items: center;
-    margin-bottom: 12px; font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 14px;
 }
-.health-item:last-child { margin-bottom: 0; }
+
+.health-item:last-child {
+    margin-bottom: 0;
+}
+
 .status-pill {
-    padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
 }
-.status-pill.online { background: rgba(255,255,255,0.2); color: white; }
-.status-pill.active { background: #10B981; color: white; }
-.sync-time { font-size: 12px; opacity: 0.8; }
+
+.status-pill.online {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.status-pill.active {
+    background: #10B981;
+    color: white;
+}
+
+.sync-time {
+    font-size: 12px;
+    opacity: 0.8;
+}
 
 /* =========================================
    STYLE KHUSUS UNTUK FORM (ADD / EDIT)
@@ -532,7 +682,7 @@ td {
     background-color: #FFFFFF;
     border-radius: 12px;
     padding: 30px;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05), 0 2px 4px -1px rgba(0,0,0,0.03);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     max-width: 800px;
     margin-top: 20px;
 }
@@ -555,7 +705,8 @@ td {
 .form-label {
     font-size: 14px;
     font-weight: 600;
-    color: #374151; /* Abu-abu gelap */
+    color: #374151;
+    /* Abu-abu gelap */
     margin-bottom: 8px;
 }
 
@@ -567,16 +718,19 @@ td {
     border-radius: 8px;
     font-size: 14px;
     color: #1F2937;
-    background-color: #F9FAFB; /* Sedikit abu-abu saat belum diklik */
+    background-color: #F9FAFB;
+    /* Sedikit abu-abu saat belum diklik */
     transition: all 0.2s ease;
     font-family: 'Inter', sans-serif;
-    box-sizing: border-box; /* Mencegah input melebar keluar batas */
+    box-sizing: border-box;
+    /* Mencegah input melebar keluar batas */
 }
 
 /* Efek menyala saat kotak input diklik (Fokus) */
 .form-control:focus {
     outline: none;
-    border-color: #315343; /* Warna hijau utama */
+    border-color: #315343;
+    /* Warna hijau utama */
     background-color: #FFFFFF;
     box-shadow: 0 0 0 3px rgba(49, 83, 67, 0.1);
 }
@@ -594,7 +748,8 @@ textarea.form-control {
     gap: 15px;
     margin-top: 20px;
     padding-top: 20px;
-    border-top: 1px solid #E5E7EB; /* Garis pemisah tipis */
+    border-top: 1px solid #E5E7EB;
+    /* Garis pemisah tipis */
 }
 
 /* Tombol Secondary (Tombol Cancel / Back) */
@@ -618,9 +773,172 @@ textarea.form-control {
     color: #111827;
 }
 
-/* Tambahan: Memastikan posisi tombol Back sejajar dengan Judul Halaman */
 .page-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+}
+
+@media screen and (max-width: 768px) {
+
+    .main-container {
+        padding: 20px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .page-title {
+        font-size: 28px;
+    }
+
+    .page-subtitle {
+        font-size: 14px;
+    }
+
+    .dashboard-metrics {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .metric-card {
+        width: 100%;
+    }
+
+    .metric-value {
+        font-size: 28px;
+        word-break: break-word;
+    }
+
+    .metric-label {
+        font-size: 14px;
+    }
+
+    .dashboard-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .recent-activities {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .dashboard-sidebar {
+        width: 100%;
+    }
+
+    .activity-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .activity-details {
+        width: 100%;
+    }
+
+    .activity-details h4 {
+        font-size: 15px;
+    }
+
+    .activity-details p {
+        font-size: 13px;
+    }
+
+    .activity-time {
+        font-size: 12px;
+    }
+
+    .quick-actions {
+        width: 100%;
+    }
+
+    .action-btn {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .system-health {
+        width: 100%;
+    }
+
+    .health-item {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .status-pill {
+        font-size: 12px;
+    }
+
+    .main-container {
+        padding: 20px;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .page-title {
+        font-size: 28px;
+        line-height: 1.2;
+    }
+
+    .page-subtitle {
+        font-size: 14px;
+    }
+
+    .page-header .btn-secondary {
+        width: 100%;
+    }
+
+    .form-container {
+        padding: 20px;
+        border-radius: 16px;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .form-label {
+        font-size: 14px;
+    }
+
+    .form-control {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    .form-actions {
+        display: flex;
+        flex-direction: column-reverse;
+        gap: 12px;
+        margin-top: 24px;
+    }
+
+    .form-actions a {
+        width: 100%;
+    }
+
+    .form-actions button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .summary-card {
+        min-width: 300px;
+    }
+
 }
